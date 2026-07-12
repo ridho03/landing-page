@@ -61,6 +61,7 @@
       body {
         margin: 0;
         min-width: 320px;
+        padding-bottom: 112px;
         background:
           linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 250, 246, 0.96)),
           var(--bg);
@@ -306,6 +307,60 @@
         color: #ffffff;
       }
 
+      .conversion-panel {
+        display: grid;
+        max-width: 660px;
+        gap: 12px;
+        margin-top: 20px;
+        padding: clamp(16px, 3vw, 22px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
+          rgba(255, 255, 255, 0.1);
+        box-shadow: 0 28px 82px rgba(0, 0, 0, 0.32);
+        backdrop-filter: blur(18px);
+      }
+
+      .conversion-panel-top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .conversion-label {
+        display: inline-flex;
+        min-height: 32px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .conversion-panel strong {
+        display: block;
+        color: #ffffff;
+        font-size: clamp(1.22rem, 3vw, 1.7rem);
+        line-height: 1.14;
+      }
+
+      .conversion-panel p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .conversion-panel .btn {
+        width: fit-content;
+        min-height: 54px;
+        padding-inline: 20px;
+      }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
@@ -386,10 +441,24 @@
 
       .btn-primary {
         background:
-          linear-gradient(135deg, var(--surface-strong), color-mix(in srgb, var(--primary) 52%, #0b0f14)),
-          var(--surface-strong);
+          linear-gradient(135deg, color-mix(in srgb, var(--accent) 86%, #7c2d12), var(--primary-strong)),
+          var(--accent);
         color: #ffffff;
-        box-shadow: 0 14px 32px rgba(17, 19, 24, 0.2);
+        animation: ctaPulse 2600ms ease-in-out infinite;
+        box-shadow: 0 18px 44px color-mix(in srgb, var(--accent) 30%, rgba(17, 19, 24, 0.24));
+      }
+
+      @keyframes ctaPulse {
+        0%,
+        100% {
+          box-shadow: 0 18px 44px color-mix(in srgb, var(--accent) 30%, rgba(17, 19, 24, 0.24));
+        }
+
+        50% {
+          box-shadow:
+            0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent),
+            0 24px 66px color-mix(in srgb, var(--accent) 42%, transparent);
+        }
       }
 
       .btn-primary::after {
@@ -405,7 +474,9 @@
       }
 
       .btn-primary:hover {
-        background: var(--primary-strong);
+        background:
+          linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--primary) 78%, #05070a)),
+          var(--accent);
         box-shadow: 0 18px 42px color-mix(in srgb, var(--primary) 32%, transparent);
       }
 
@@ -764,6 +835,56 @@
         padding-top: 20px;
       }
 
+      .sticky-cta {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 900;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(16, 19, 24, 0.92);
+        color: #ffffff;
+        box-shadow: 0 -24px 70px rgba(0, 0, 0, 0.26);
+        backdrop-filter: blur(18px);
+      }
+
+      .sticky-cta::before {
+        position: absolute;
+        inset: 0 0 auto;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-2));
+        content: "";
+      }
+
+      .sticky-cta-inner {
+        display: flex;
+        min-height: 86px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .sticky-copy {
+        display: grid;
+        gap: 2px;
+      }
+
+      .sticky-copy strong {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+
+      .sticky-copy span {
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 0.9rem;
+      }
+
+      .sticky-cta .btn {
+        flex: 0 0 auto;
+        min-height: 54px;
+        padding-inline: 22px;
+      }
+
       .promo-modal {
         position: fixed;
         inset: 0;
@@ -929,6 +1050,10 @@
       }
 
       @media (max-width: 680px) {
+        body {
+          padding-bottom: 136px;
+        }
+
         .site-shell {
           width: min(100% - 24px, 1160px);
         }
@@ -944,6 +1069,7 @@
         .hero-actions,
         .hero-note,
         .hero-stats,
+        .conversion-panel-top,
         .section-head {
           flex-direction: column;
           align-items: stretch;
@@ -967,8 +1093,24 @@
         }
 
         .btn,
+        .conversion-panel .btn,
         .cta-band .btn {
           width: 100%;
+        }
+
+        .sticky-cta-inner {
+          min-height: auto;
+          flex-direction: column;
+          align-items: stretch;
+          padding-block: 12px;
+        }
+
+        .sticky-copy {
+          text-align: center;
+        }
+
+        .sticky-copy span {
+          display: none;
         }
 
         .footer .site-shell {
@@ -1026,6 +1168,29 @@
             <div class="live-banner" aria-label="Status live">
               <span>Live update</span>
               Rekomendasi tema otomatis berubah setiap hari
+            </div>
+
+            <div class="conversion-panel" aria-label="Akses cepat">
+              <div class="conversion-panel-top">
+                <span class="conversion-label">Akses cepat</span>
+                <strong id="conversionTitle">Buka pilihan populer hari ini</strong>
+              </div>
+              <p id="conversionText">
+                Pilih rekomendasi aktif dan lanjutkan ke halaman tujuan dalam satu klik.
+              </p>
+              <a class="btn btn-primary" id="heroPanelCta" href="#" rel="sponsored noopener">
+                <span id="heroPanelCtaText">Buka Sekarang</span>
+                <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M5 12h14m-6-6 6 6-6 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
 
             <div class="hero-actions" aria-label="Aksi utama">
@@ -1157,6 +1322,28 @@
         <span id="updatedAt">Update harian</span>
       </div>
     </footer>
+
+    <div class="sticky-cta" aria-label="Aksi cepat">
+      <div class="site-shell sticky-cta-inner">
+        <div class="sticky-copy">
+          <strong id="stickyTitle">Buka rekomendasi aktif hari ini</strong>
+          <span id="stickyText">Satu klik untuk lanjut ke pilihan populer.</span>
+        </div>
+        <a class="btn btn-primary" id="stickyCta" href="#" rel="sponsored noopener">
+          <span id="stickyCtaText">Buka Sekarang</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M5 12h14m-6-6 6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
 
     <div class="promo-modal" id="promoModal" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-describedby="promoText">
       <div class="promo-dialog" role="document">
@@ -1530,7 +1717,9 @@
       const root = document.documentElement;
       const themeTabs = document.querySelector("#themeTabs");
       const primaryCta = document.querySelector("#primaryCta");
+      const heroPanelCta = document.querySelector("#heroPanelCta");
       const finalCta = document.querySelector("#finalCta");
+      const stickyCta = document.querySelector("#stickyCta");
       const promoModal = document.querySelector("#promoModal");
       const promoCta = document.querySelector("#promoCta");
       const promoClose = document.querySelector("#promoClose");
@@ -1750,6 +1939,10 @@
         text("#mediaTitle", template.mediaTitle);
         text("#mediaText", template.mediaText);
         text("#finalText", template.finalText);
+        text("#conversionTitle", template.popup.title);
+        text("#conversionText", template.popup.text);
+        text("#stickyTitle", template.popup.title);
+        text("#stickyText", `${template.label} aktif hari ini. Buka sekarang sebelum tema berganti.`);
 
         document.title = `${template.label} Hari Ini | TrendPulse`;
         setMeta("meta[name='description']", template.lead);
@@ -1763,10 +1956,14 @@
         document.querySelector("#heroImage").alt = template.imageAlt;
 
         setLink(primaryCta, activeLink);
+        setLink(heroPanelCta, activeLink);
         setLink(finalCta, activeLink);
+        setLink(stickyCta, activeLink);
         setLink(promoCta, activeLink);
         text("#primaryCtaText", activeCta);
+        text("#heroPanelCtaText", activeCta);
         text("#finalCtaText", activeCta);
+        text("#stickyCtaText", activeCta);
 
         renderStats(template.stats);
         renderTags(template.tags);
