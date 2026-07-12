@@ -1,0 +1,1604 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Landing page trending harian dengan template dinamis untuk AI, Piala Dunia, gaming, crypto, dan topik viral lain."
+    />
+    <title>TrendPulse | Update Harian Pilihan</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TrendPulse | Update Harian Pilihan" />
+    <meta
+      property="og:description"
+      content="Update trending harian dengan tema AI, Piala Dunia, gaming, crypto, dan hiburan."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=82"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TrendPulse | Update Harian Pilihan" />
+    <meta
+      name="twitter:description"
+      content="Update trending harian dengan tema AI, Piala Dunia, gaming, crypto, dan hiburan."
+    />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=82"
+    />
+    <style>
+      :root {
+        --bg: #f8faf6;
+        --surface: #ffffff;
+        --surface-strong: #101318;
+        --ink: #111318;
+        --muted: #59616d;
+        --line: #dde5de;
+        --primary: #0f766e;
+        --primary-strong: #0b4f49;
+        --accent: #f97316;
+        --accent-2: #2563eb;
+        --soft: #e9f7f4;
+        --shadow: 0 18px 60px rgba(17, 19, 24, 0.12);
+        --radius: 8px;
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 250, 246, 0.96)),
+          var(--bg);
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        content: "";
+        background-image:
+          linear-gradient(rgba(17, 19, 24, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 19, 24, 0.045) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      button,
+      a {
+        touch-action: manipulation;
+      }
+
+      :focus-visible {
+        outline: 3px solid color-mix(in srgb, var(--accent) 72%, white);
+        outline-offset: 4px;
+      }
+
+      .site-shell {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(248, 250, 246, 0.88);
+        border-bottom: 1px solid rgba(17, 19, 24, 0.08);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        display: flex;
+        min-height: 72px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 900;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .theme-tabs {
+        display: flex;
+        max-width: 520px;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 6px;
+        border: 1px solid rgba(17, 19, 24, 0.1);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .theme-tab {
+        min-height: 44px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: calc(var(--radius) - 2px);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.92rem;
+        font-weight: 750;
+        white-space: nowrap;
+        transition:
+          background 180ms ease,
+          color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .theme-tab:hover {
+        background: rgba(17, 19, 24, 0.06);
+        color: var(--ink);
+      }
+
+      .theme-tab[aria-pressed="true"] {
+        background: var(--surface-strong);
+        color: #ffffff;
+      }
+
+      .hero {
+        display: grid;
+        min-height: calc(100dvh - 72px);
+        grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+        align-items: center;
+        gap: clamp(32px, 5vw, 72px);
+        padding: clamp(36px, 6vw, 72px) 0 clamp(28px, 5vw, 56px);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        min-height: 36px;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+        border-radius: var(--radius);
+        background: color-mix(in srgb, var(--soft) 80%, white);
+        color: var(--primary-strong);
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .status-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent);
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 18px 0 18px;
+        font-size: clamp(2.45rem, 7vw, 5.8rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 660px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1.02rem, 1.6vw, 1.24rem);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px;
+        border: 1px solid transparent;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-weight: 850;
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          background 180ms ease,
+          color 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-primary {
+        background: var(--surface-strong);
+        color: #ffffff;
+        box-shadow: 0 14px 32px rgba(17, 19, 24, 0.2);
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-strong);
+      }
+
+      .btn-secondary {
+        border-color: rgba(17, 19, 24, 0.16);
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+      }
+
+      .arrow-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 660px;
+        margin-top: 28px;
+      }
+
+      .stat {
+        min-height: 92px;
+        padding: 14px;
+        border: 1px solid rgba(17, 19, 24, 0.08);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.36rem;
+        line-height: 1.15;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .hero-media {
+        position: relative;
+        min-height: 540px;
+        overflow: hidden;
+        border: 1px solid rgba(17, 19, 24, 0.12);
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        box-shadow: var(--shadow);
+        isolation: isolate;
+      }
+
+      .hero-media::after {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        content: "";
+        background:
+          linear-gradient(180deg, rgba(16, 19, 24, 0.04), rgba(16, 19, 24, 0.72)),
+          linear-gradient(90deg, rgba(16, 19, 24, 0.64), transparent 52%);
+      }
+
+      .hero-media img {
+        width: 100%;
+        height: 100%;
+        min-height: 540px;
+        object-fit: cover;
+        transform: scale(1.02);
+      }
+
+      .media-copy {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        left: 24px;
+        z-index: 2;
+        color: #ffffff;
+      }
+
+      .media-copy p {
+        max-width: 430px;
+        margin: 8px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .live-strip {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
+        display: flex;
+        max-width: calc(100% - 40px);
+        gap: 8px;
+        overflow-x: auto;
+      }
+
+      .live-pill {
+        flex: 0 0 auto;
+        padding: 8px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.13);
+        color: #ffffff;
+        font-size: 0.84rem;
+        font-weight: 800;
+        backdrop-filter: blur(10px);
+      }
+
+      .section {
+        padding: clamp(44px, 7vw, 78px) 0;
+      }
+
+      .section-alt {
+        background: #ffffff;
+        border-block: 1px solid rgba(17, 19, 24, 0.08);
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .section-head h2 {
+        max-width: 700px;
+        margin: 0;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .section-head p {
+        max-width: 430px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .trend-grid,
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .trend-card,
+      .benefit-card,
+      .ad-box {
+        border: 1px solid rgba(17, 19, 24, 0.1);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .trend-card {
+        display: flex;
+        min-height: 270px;
+        flex-direction: column;
+        padding: 18px;
+        color: inherit;
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .trend-card:hover {
+        transform: translateY(-4px);
+        border-color: color-mix(in srgb, var(--primary) 44%, transparent);
+        box-shadow: 0 18px 40px rgba(17, 19, 24, 0.11);
+      }
+
+      .card-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .card-mark {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border-radius: var(--radius);
+        background: color-mix(in srgb, var(--primary) 12%, white);
+        color: var(--primary-strong);
+        font-weight: 900;
+      }
+
+      .trend-card h3 {
+        margin: 18px 0 10px;
+        font-size: 1.38rem;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .trend-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 22px;
+        color: var(--primary-strong);
+        font-weight: 850;
+      }
+
+      .benefit-card {
+        min-height: 190px;
+        padding: 18px;
+      }
+
+      .benefit-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.08rem;
+      }
+
+      .benefit-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .ad-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+        gap: 16px;
+      }
+
+      .ad-box {
+        display: grid;
+        min-height: 170px;
+        place-items: center;
+        padding: 20px;
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--soft) 78%, white), #ffffff),
+          var(--surface);
+        text-align: center;
+      }
+
+      .ad-box strong {
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .ad-box span {
+        display: block;
+        max-width: 460px;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .cta-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 24px;
+        padding: clamp(26px, 5vw, 42px);
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        color: #ffffff;
+      }
+
+      .cta-band h2 {
+        margin: 0 0 8px;
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .cta-band p {
+        max-width: 720px;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .cta-band .btn-primary {
+        background: #ffffff;
+        color: var(--surface-strong);
+        box-shadow: none;
+      }
+
+      .cta-band .btn-primary:hover {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .footer {
+        padding: 28px 0 40px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .footer .site-shell {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        border-top: 1px solid rgba(17, 19, 24, 0.1);
+        padding-top: 20px;
+      }
+
+      .promo-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: rgba(16, 19, 24, 0.62);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 220ms ease;
+      }
+
+      .promo-modal.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .promo-dialog {
+        position: relative;
+        display: grid;
+        width: min(100%, 520px);
+        gap: 18px;
+        padding: clamp(22px, 5vw, 30px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--soft) 76%, white), #ffffff 58%),
+          #ffffff;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+        transform: translateY(18px) scale(0.97);
+        transition: transform 220ms ease;
+      }
+
+      .promo-modal.is-open .promo-dialog {
+        transform: translateY(0) scale(1);
+      }
+
+      .promo-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 1px solid rgba(17, 19, 24, 0.12);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .promo-close:hover {
+        background: #ffffff;
+      }
+
+      .promo-kicker {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 34px;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+
+      .promo-dialog h2 {
+        margin: 0;
+        padding-right: 42px;
+        font-size: clamp(1.8rem, 7vw, 2.9rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .promo-dialog p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .promo-points {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .promo-points li {
+        display: flex;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .promo-points li::before {
+        flex: 0 0 auto;
+        width: 10px;
+        height: 10px;
+        margin-top: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        content: "";
+      }
+
+      .promo-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .promo-note {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      @media (max-width: 980px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-actions,
+        .theme-tabs {
+          width: 100%;
+        }
+
+        .hero {
+          min-height: auto;
+          grid-template-columns: 1fr;
+        }
+
+        .hero-media,
+        .hero-media img {
+          min-height: 430px;
+        }
+
+        .trend-grid,
+        .benefit-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .ad-grid,
+        .cta-band {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-band .btn {
+          width: fit-content;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .site-shell {
+          width: min(100% - 24px, 1160px);
+        }
+
+        .hero {
+          padding-top: 28px;
+        }
+
+        h1 {
+          font-size: clamp(2.35rem, 15vw, 4rem);
+        }
+
+        .hero-actions,
+        .hero-stats,
+        .section-head {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .hero-stats,
+        .trend-grid,
+        .benefit-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-media,
+        .hero-media img {
+          min-height: 360px;
+        }
+
+        .media-copy {
+          right: 16px;
+          bottom: 16px;
+          left: 16px;
+        }
+
+        .btn,
+        .cta-band .btn {
+          width: 100%;
+        }
+
+        .footer .site-shell {
+          flex-direction: column;
+        }
+
+        .promo-dialog {
+          max-height: calc(100dvh - 40px);
+          overflow: auto;
+        }
+
+        .promo-actions .btn {
+          width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="site-shell nav" aria-label="Navigasi utama">
+        <a class="brand" href="#">
+          <span class="brand-mark" aria-hidden="true">TP</span>
+          <span>TrendPulse</span>
+        </a>
+
+        <div class="nav-actions">
+          <div class="theme-tabs" id="themeTabs" aria-label="Pilih kategori trending"></div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="site-shell hero" aria-labelledby="heroTitle">
+        <div>
+          <div class="eyebrow">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="eyebrow">Update harian</span>
+          </div>
+
+          <h1 id="heroTitle">Loading...</h1>
+          <p class="lead" id="heroLead"></p>
+
+          <div class="hero-actions" aria-label="Aksi utama">
+            <a class="btn btn-primary" id="primaryCta" href="#" rel="sponsored noopener">
+              <span id="primaryCtaText">Join Sekarang</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M5 12h14m-6-6 6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a class="btn btn-secondary" href="#topik">Lihat Topik</a>
+          </div>
+
+          <div class="hero-stats" id="heroStats" aria-label="Ringkasan"></div>
+        </div>
+
+        <aside class="hero-media" aria-label="Visual kategori aktif">
+          <img id="heroImage" src="" alt="" width="720" height="820" fetchpriority="high" />
+          <div class="live-strip" id="liveStrip" aria-label="Tag populer"></div>
+          <div class="media-copy">
+            <strong id="mediaTitle">Topik pilihan</strong>
+            <p id="mediaText"></p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section-alt" id="topik">
+        <div class="site-shell">
+          <div class="section-head">
+            <h2 id="sectionTitle">Topik yang sedang dicari</h2>
+            <p id="sectionText"></p>
+          </div>
+          <div class="trend-grid" id="trendGrid"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="site-shell">
+          <div class="section-head">
+            <h2>Kenapa pengunjung betah membuka update ini</h2>
+            <p>
+              Ringkas, cepat dipahami, dan selalu punya arah berikutnya untuk dibuka.
+            </p>
+          </div>
+          <div class="benefit-grid">
+            <article class="benefit-card">
+              <strong>Topik sedang ramai</strong>
+              <p>
+                Pengunjung langsung melihat tema yang terasa relevan dengan pembicaraan hari ini.
+              </p>
+            </article>
+            <article class="benefit-card">
+              <strong>Bacaan pendek</strong>
+              <p>
+                Setiap kartu dibuat singkat supaya nyaman untuk traffic mobile dan kunjungan cepat.
+              </p>
+            </article>
+            <article class="benefit-card">
+              <strong>Arah klik jelas</strong>
+              <p>
+                Tombol utama dan kartu topik membawa pengunjung ke halaman tujuan yang sama.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" aria-label="Sponsor">
+        <div class="site-shell ad-grid">
+          <div class="ad-box">
+            <div>
+              <strong>Rekomendasi Partner</strong>
+              <span>Penawaran pilihan yang relevan dengan minat pembaca hari ini.</span>
+              <!-- Tempel kode Adsterra Native Banner di sini. -->
+            </div>
+          </div>
+          <div class="ad-box">
+            <div>
+              <strong>Spot Sponsor</strong>
+              <span>Konten sponsor singkat dengan tampilan bersih dan mudah dipindai.</span>
+              <!-- Tempel kode Adsterra Banner / Direct Link di sini. -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="site-shell">
+          <div class="cta-band">
+            <div>
+              <h2 id="finalTitle">Gabung dan ikuti update hari ini</h2>
+              <p id="finalText"></p>
+            </div>
+            <a class="btn btn-primary" id="finalCta" href="#" rel="sponsored noopener">
+              <span id="finalCtaText">Join Sekarang</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M5 12h14m-6-6 6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="site-shell">
+        <span>TrendPulse</span>
+        <span id="updatedAt">Update harian</span>
+      </div>
+    </footer>
+
+    <div class="promo-modal" id="promoModal" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-describedby="promoText">
+      <div class="promo-dialog" role="document">
+        <button class="promo-close" id="promoClose" type="button" aria-label="Tutup popup">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m6 6 12 12M18 6 6 18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <span class="promo-kicker" id="promoKicker">Promo aktif</span>
+        <h2 id="promoTitle">Klaim update hari ini</h2>
+        <p id="promoText"></p>
+        <ul class="promo-points" id="promoPoints"></ul>
+        <div class="promo-actions">
+          <a class="btn btn-primary" id="promoCta" href="#" rel="sponsored noopener">
+            <span id="promoCtaText">Buka Sekarang</span>
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M5 12h14m-6-6 6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+          <button class="btn btn-secondary" id="promoLater" type="button">Nanti dulu</button>
+        </div>
+        <span class="promo-note" id="promoNote"></span>
+      </div>
+    </div>
+
+    <script>
+      // Untuk agent pengelola: isi mainLink untuk satu link utama.
+      // Jika sudah punya tracking terpisah, isi links per tema di bawah.
+      const CONFIG = {
+        activeTemplate: "ai",
+        autoRotateDaily: true,
+        rotationStartDate: "2026-07-12",
+        showPopupOncePerSession: true,
+        mainLink: "URL_ADSTERRA_KAMU",
+        links: {
+          ai: "URL_ADSTERRA_AI",
+          worldcup: "URL_ADSTERRA_BOLA",
+          gaming: "URL_ADSTERRA_GAMING",
+          crypto: "URL_ADSTERRA_CRYPTO",
+          movie: "URL_ADSTERRA_FILM",
+        },
+        dailyRotation: ["ai", "worldcup", "gaming", "crypto", "movie"],
+      };
+
+      const TEMPLATES = {
+        ai: {
+          label: "AI",
+          eyebrow: "Trend AI aktif hari ini",
+          title: "AI makin cepat, peluang digital ikut bergerak.",
+          lead:
+            "Ikuti rangkuman tools, otomasi, dan ide produktif yang sedang dicari banyak orang hari ini.",
+          sectionTitle: "Pilihan AI yang paling mudah diklik",
+          sectionText:
+            "Konten dibuat pendek, jelas, dan langsung mengarah ke link utama kamu.",
+          mediaTitle: "AI productivity radar",
+          mediaText:
+            "Topik dikemas sebagai update cepat agar pengunjung merasa ada hal baru untuk dibuka.",
+          image:
+            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=82",
+          imageAlt: "Ilustrasi visual teknologi AI modern dengan layar digital",
+          colors: {
+            primary: "#0f766e",
+            primaryStrong: "#0b4f49",
+            accent: "#f97316",
+            accent2: "#2563eb",
+            soft: "#e7f7f3",
+            bg: "#f8faf6",
+          },
+          stats: [
+            ["24 jam", "Update topik"],
+            ["3 menit", "Baca cepat"],
+            ["1 klik", "Masuk link"],
+          ],
+          tags: ["AI tools", "Otomasi", "Prompt", "Bisnis digital"],
+          items: [
+            {
+              title: "AI Tools untuk kerja cepat",
+              desc: "Rangkuman tool populer untuk menulis, riset, desain, dan coding.",
+              label: "Produktivitas",
+            },
+            {
+              title: "Ide cuan dari otomasi",
+              desc: "Sudut pandang ringan tentang cara AI membantu bisnis kecil dan kreator.",
+              label: "Peluang",
+            },
+            {
+              title: "Prompt yang sedang dicoba",
+              desc: "Format prompt pendek yang menarik untuk dibuat konten harian.",
+              label: "Prompt",
+            },
+          ],
+          finalText:
+            "Bawa pengunjung ke link utama dengan halaman yang terasa segar setiap hari.",
+          popup: {
+            kicker: "Akses AI hari ini",
+            title: "Klaim AI Gratis untuk mulai coba tools pilihan.",
+            text:
+              "Buka daftar rekomendasi dan cek tools AI gratis yang bisa langsung kamu coba untuk kerja, konten, dan ide bisnis.",
+            points: [
+              "Daftar tools AI populer dalam satu halaman",
+              "Cocok untuk pemula yang ingin coba cepat",
+              "Update bisa diganti mengikuti tren harian",
+            ],
+            cta: "Klaim AI Gratis",
+            note: "Cek detail dan ketersediaan di halaman tujuan.",
+          },
+        },
+        worldcup: {
+          label: "Piala Dunia",
+          eyebrow: "Tema bola siap tayang",
+          title: "Momen sepak bola besar selalu bikin orang penasaran.",
+          lead:
+            "Pakai template ini untuk jadwal, prediksi, berita tim, dan momen viral seputar turnamen bola.",
+          sectionTitle: "Topik bola yang gampang menarik perhatian",
+          sectionText:
+            "Cocok untuk traffic cepat dari fans yang ingin update ringkas.",
+          mediaTitle: "Matchday spotlight",
+          mediaText:
+            "Buat pengunjung masuk dari satu cerita kuat, lalu arahkan ke CTA utama.",
+          image:
+            "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=82",
+          imageAlt: "Lapangan sepak bola dengan pemain sedang bertanding",
+          colors: {
+            primary: "#15803d",
+            primaryStrong: "#14532d",
+            accent: "#dc2626",
+            accent2: "#0ea5e9",
+            soft: "#edf8ee",
+            bg: "#f7fbf4",
+          },
+          stats: [
+            ["Matchday", "Konten cepat"],
+            ["Fans", "Topik panas"],
+            ["Live", "CTA aktif"],
+          ],
+          tags: ["Jadwal", "Prediksi", "Skuad", "Highlight"],
+          items: [
+            {
+              title: "Prediksi pertandingan",
+              desc: "Angle singkat untuk menarik fans membaca sebelum laga.",
+              label: "Prediksi",
+            },
+            {
+              title: "Pemain yang lagi disorot",
+              desc: "Konten ringan tentang bintang, line-up, dan performa tim.",
+              label: "Skuad",
+            },
+            {
+              title: "Highlight dan momen viral",
+              desc: "Format cepat untuk cerita yang sedang ramai dibahas.",
+              label: "Viral",
+            },
+          ],
+          finalText:
+            "Saat topik bola sedang ramai, arahkan rasa penasaran pengunjung ke link yang kamu pasang.",
+          popup: {
+            kicker: "Matchday panas",
+            title: "Jangan ketinggalan update bola yang lagi ramai.",
+            text:
+              "Masuk untuk cek prediksi, highlight, dan topik pertandingan yang paling banyak dibahas fans hari ini.",
+            points: [
+              "Prediksi dan kabar tim dibuat ringkas",
+              "Topik fans yang sedang naik",
+              "Cocok dibuka sebelum pertandingan mulai",
+            ],
+            cta: "Cek Update Bola",
+            note: "Konten bersifat hiburan dan rangkuman singkat.",
+          },
+        },
+        gaming: {
+          label: "Gaming",
+          eyebrow: "Tema gaming aktif",
+          title: "Game baru, event, dan reward selalu punya traffic sendiri.",
+          lead:
+            "Gunakan template gaming untuk update patch, tier list, reward, turnamen, dan komunitas pemain.",
+          sectionTitle: "Konten gaming yang cepat dipahami",
+          sectionText:
+            "Bahasa singkat, visual kuat, dan CTA jelas untuk pengunjung mobile.",
+          mediaTitle: "Player hub",
+          mediaText:
+            "Template ini cocok untuk game mobile, esports, dan event komunitas.",
+          image:
+            "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=82",
+          imageAlt: "Meja gaming dengan monitor dan pencahayaan warna-warni",
+          colors: {
+            primary: "#7c2d12",
+            primaryStrong: "#431407",
+            accent: "#22c55e",
+            accent2: "#8b5cf6",
+            soft: "#fff1e6",
+            bg: "#fffaf4",
+          },
+          stats: [
+            ["Event", "Update harian"],
+            ["Tier", "Konten cepat"],
+            ["Reward", "CTA kuat"],
+          ],
+          tags: ["Patch", "Tier list", "Reward", "Esports"],
+          items: [
+            {
+              title: "Tier list terbaru",
+              desc: "Rangkum karakter, senjata, atau build yang sedang dicari.",
+              label: "Meta",
+            },
+            {
+              title: "Event dan reward",
+              desc: "Arahkan pemain ke update singkat seputar hadiah dan misi.",
+              label: "Reward",
+            },
+            {
+              title: "Turnamen komunitas",
+              desc: "Buat halaman terasa aktif dengan highlight kompetitif.",
+              label: "Esports",
+            },
+          ],
+          finalText:
+            "Pakai momentum event game untuk mengumpulkan klik dari pengunjung yang sudah penasaran.",
+          popup: {
+            kicker: "Event game aktif",
+            title: "Ambil info reward dan meta terbaru sebelum kelewatan.",
+            text:
+              "Buka update cepat seputar event, tier list, reward, dan topik gaming yang sedang dicari pemain.",
+            points: [
+              "Ringkasan patch dan event",
+              "Tier list mudah dibaca",
+              "Update cocok untuk pemain mobile",
+            ],
+            cta: "Buka Info Game",
+            note: "Hadiah atau event mengikuti halaman tujuan dan publisher terkait.",
+          },
+        },
+        crypto: {
+          label: "Crypto",
+          eyebrow: "Tema market watch",
+          title: "Market bergerak cepat, pembaca suka rangkuman yang padat.",
+          lead:
+            "Template crypto cocok untuk watchlist, edukasi ringan, berita proyek, dan tren komunitas.",
+          sectionTitle: "Topik market yang bisa diganti cepat",
+          sectionText:
+            "Gunakan bahasa netral dan hindari janji profit agar halaman tetap rapi dan dipercaya.",
+          mediaTitle: "Market pulse",
+          mediaText:
+            "Buat pengunjung membaca ringkasan dulu, lalu masuk ke link utama.",
+          image:
+            "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=1200&q=82",
+          imageAlt: "Visual koin digital dan grafik market crypto",
+          colors: {
+            primary: "#1d4ed8",
+            primaryStrong: "#1e3a8a",
+            accent: "#f59e0b",
+            accent2: "#10b981",
+            soft: "#eef5ff",
+            bg: "#f8fbff",
+          },
+          stats: [
+            ["Watch", "Pantau tren"],
+            ["Netral", "Tanpa janji"],
+            ["Cepat", "Update ringkas"],
+          ],
+          tags: ["Watchlist", "Airdrop", "Edukasi", "Komunitas"],
+          items: [
+            {
+              title: "Watchlist komunitas",
+              desc: "Daftar topik yang sedang sering dibahas tanpa klaim berlebihan.",
+              label: "Watchlist",
+            },
+            {
+              title: "Edukasi crypto ringan",
+              desc: "Bahas istilah, risiko, dan cara membaca tren secara singkat.",
+              label: "Edukasi",
+            },
+            {
+              title: "Update proyek populer",
+              desc: "Format ringkas untuk kabar project, event, atau komunitas.",
+              label: "Update",
+            },
+          ],
+          finalText:
+            "Bawa traffic market-watch ke halaman yang jelas, netral, dan mudah dipahami.",
+          popup: {
+            kicker: "Market watch",
+            title: "Cek watchlist crypto yang sedang ramai dibahas.",
+            text:
+              "Lihat rangkuman topik market, edukasi ringan, dan kabar komunitas tanpa klaim profit berlebihan.",
+            points: [
+              "Bahasa netral dan mudah dipahami",
+              "Topik market yang cepat berubah",
+              "Cocok untuk pembaca yang ingin pantau tren",
+            ],
+            cta: "Cek Watchlist",
+            note: "Bukan nasihat keuangan. Selalu cek risiko sendiri.",
+          },
+        },
+        movie: {
+          label: "Film",
+          eyebrow: "Tema hiburan aktif",
+          title: "Film, drama, dan trailer baru selalu memancing rasa penasaran.",
+          lead:
+            "Template hiburan cocok untuk daftar tontonan, update trailer, rekomendasi genre, dan kabar aktor.",
+          sectionTitle: "Topik hiburan untuk traffic santai",
+          sectionText:
+            "Bangun klik dari rasa penasaran tanpa membuat klaim palsu.",
+          mediaTitle: "Watchlist harian",
+          mediaText:
+            "Konten pendek membantu pengunjung cepat memilih apa yang ingin dibuka.",
+          image:
+            "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=82",
+          imageAlt: "Kursi bioskop menghadap layar film",
+          colors: {
+            primary: "#be123c",
+            primaryStrong: "#881337",
+            accent: "#0891b2",
+            accent2: "#f97316",
+            soft: "#fff0f3",
+            bg: "#fff8f9",
+          },
+          stats: [
+            ["Trailer", "Topik baru"],
+            ["List", "Mudah klik"],
+            ["Genre", "Cepat ganti"],
+          ],
+          tags: ["Trailer", "Drama", "Series", "Rekomendasi"],
+          items: [
+            {
+              title: "Watchlist minggu ini",
+              desc: "Rekomendasi ringan untuk film, series, atau drama yang sedang ramai.",
+              label: "Watchlist",
+            },
+            {
+              title: "Trailer yang baru rilis",
+              desc: "Kemas kabar trailer dalam format pendek dan menarik.",
+              label: "Trailer",
+            },
+            {
+              title: "Genre yang sedang naik",
+              desc: "Gunakan angle horor, action, romance, atau komedi sesuai traffic.",
+              label: "Genre",
+            },
+          ],
+          finalText:
+            "Jadikan rasa penasaran penonton sebagai pintu masuk ke link utama kamu.",
+          popup: {
+            kicker: "Watchlist baru",
+            title: "Temukan tontonan yang lagi ramai dibicarakan.",
+            text:
+              "Masuk untuk melihat rekomendasi film, drama, trailer, dan genre yang sedang naik hari ini.",
+            points: [
+              "Pilihan tontonan dibuat singkat",
+              "Cocok untuk cari inspirasi cepat",
+              "Update bisa berubah mengikuti tren hiburan",
+            ],
+            cta: "Buka Watchlist",
+            note: "Rekomendasi bersifat editorial dan bisa berubah sewaktu-waktu.",
+          },
+        },
+      };
+
+      const root = document.documentElement;
+      const themeTabs = document.querySelector("#themeTabs");
+      const primaryCta = document.querySelector("#primaryCta");
+      const finalCta = document.querySelector("#finalCta");
+      const promoModal = document.querySelector("#promoModal");
+      const promoCta = document.querySelector("#promoCta");
+      const promoClose = document.querySelector("#promoClose");
+      const promoLater = document.querySelector("#promoLater");
+      let currentTemplateKey = "";
+      let promoTimer = null;
+      const PROMO_SEEN_KEY = "trendpulse:promo-seen";
+
+      function todayIndex() {
+        const start = new Date(`${CONFIG.rotationStartDate}T00:00:00`);
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const diff = today.getTime() - start.getTime();
+        return Math.floor(diff / 86400000);
+      }
+
+      function getInitialTemplateKey() {
+        const params = new URLSearchParams(window.location.search);
+        const fromUrl = params.get("tema");
+        if (fromUrl && TEMPLATES[fromUrl]) return fromUrl;
+        if (CONFIG.autoRotateDaily) {
+          const index = todayIndex();
+          const total = CONFIG.dailyRotation.length;
+          const safeIndex = ((index % total) + total) % total;
+          return CONFIG.dailyRotation[safeIndex];
+        }
+        return TEMPLATES[CONFIG.activeTemplate] ? CONFIG.activeTemplate : "ai";
+      }
+
+      function getTemplateLink(key) {
+        const themeLink = CONFIG.links[key];
+        if (themeLink && !isPlaceholderLink(themeLink)) return themeLink;
+        if (CONFIG.mainLink && !isPlaceholderLink(CONFIG.mainLink)) return CONFIG.mainLink;
+        return themeLink || CONFIG.mainLink || "#";
+      }
+
+      function isPlaceholderLink(href) {
+        return !href || href.startsWith("URL_ADSTERRA");
+      }
+
+      function setColors(colors) {
+        root.style.setProperty("--primary", colors.primary);
+        root.style.setProperty("--primary-strong", colors.primaryStrong);
+        root.style.setProperty("--accent", colors.accent);
+        root.style.setProperty("--accent-2", colors.accent2);
+        root.style.setProperty("--soft", colors.soft);
+        root.style.setProperty("--bg", colors.bg);
+      }
+
+      function setLink(anchor, href) {
+        const safeHref = href || "#";
+        anchor.setAttribute("href", safeHref);
+        if (/^https?:\/\//i.test(safeHref)) {
+          anchor.target = "_blank";
+        } else {
+          anchor.removeAttribute("target");
+        }
+      }
+
+      function text(selector, value) {
+        document.querySelector(selector).textContent = value;
+      }
+
+      function setMeta(selector, value) {
+        const meta = document.querySelector(selector);
+        if (meta) meta.setAttribute("content", value);
+      }
+
+      function canUseSessionStorage() {
+        try {
+          sessionStorage.setItem("trendpulse:test", "1");
+          sessionStorage.removeItem("trendpulse:test");
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function hasSeenPromo() {
+        if (!CONFIG.showPopupOncePerSession || !canUseSessionStorage()) return false;
+        return sessionStorage.getItem(PROMO_SEEN_KEY) === "1";
+      }
+
+      function markPromoSeen() {
+        if (!CONFIG.showPopupOncePerSession || !canUseSessionStorage()) return;
+        sessionStorage.setItem(PROMO_SEEN_KEY, "1");
+      }
+
+      function renderStats(stats) {
+        const container = document.querySelector("#heroStats");
+        container.replaceChildren();
+        stats.forEach(([value, label]) => {
+          const item = document.createElement("div");
+          item.className = "stat";
+          const strong = document.createElement("strong");
+          strong.textContent = value;
+          const span = document.createElement("span");
+          span.textContent = label;
+          item.append(strong, span);
+          container.append(item);
+        });
+      }
+
+      function renderTags(tags) {
+        const container = document.querySelector("#liveStrip");
+        container.replaceChildren();
+        tags.forEach((tag) => {
+          const pill = document.createElement("span");
+          pill.className = "live-pill";
+          pill.textContent = tag;
+          container.append(pill);
+        });
+      }
+
+      function renderCards(items) {
+        const grid = document.querySelector("#trendGrid");
+        grid.replaceChildren();
+        items.forEach((item, index) => {
+          const card = document.createElement("a");
+          card.className = "trend-card";
+          card.rel = "sponsored noopener";
+          setLink(card, item.link || getTemplateLink(currentTemplateKey));
+
+          const top = document.createElement("div");
+          top.className = "card-topline";
+
+          const label = document.createElement("span");
+          label.textContent = item.label;
+
+          const mark = document.createElement("span");
+          mark.className = "card-mark";
+          mark.setAttribute("aria-hidden", "true");
+          mark.textContent = String(index + 1).padStart(2, "0");
+
+          const title = document.createElement("h3");
+          title.textContent = item.title;
+
+          const desc = document.createElement("p");
+          desc.textContent = item.desc;
+
+          const linkText = document.createElement("span");
+          linkText.className = "card-link";
+          linkText.textContent = "Buka detail ->";
+
+          top.append(label, mark);
+          card.append(top, title, desc, linkText);
+          grid.append(card);
+        });
+      }
+
+      function renderPopup(popup) {
+        text("#promoKicker", popup.kicker);
+        text("#promoTitle", popup.title);
+        text("#promoText", popup.text);
+        text("#promoCtaText", popup.cta);
+        text("#promoNote", popup.note);
+
+        const points = document.querySelector("#promoPoints");
+        points.replaceChildren();
+        popup.points.forEach((point) => {
+          const item = document.createElement("li");
+          item.textContent = point;
+          points.append(item);
+        });
+      }
+
+      function openPromo() {
+        if (hasSeenPromo()) return;
+        promoModal.classList.add("is-open");
+        markPromoSeen();
+        promoClose.focus();
+      }
+
+      function closePromo() {
+        promoModal.classList.remove("is-open");
+      }
+
+      function schedulePromo() {
+        window.clearTimeout(promoTimer);
+        if (hasSeenPromo()) return;
+        promoTimer = window.setTimeout(openPromo, 900);
+      }
+
+      function renderTabs(activeKey) {
+        themeTabs.replaceChildren();
+        Object.entries(TEMPLATES).forEach(([key, template]) => {
+          const button = document.createElement("button");
+          button.className = "theme-tab";
+          button.type = "button";
+          button.textContent = template.label;
+          button.setAttribute("aria-pressed", String(key === activeKey));
+          button.addEventListener("click", () => {
+            applyTemplate(key);
+            const url = new URL(window.location.href);
+            url.searchParams.set("tema", key);
+            window.history.replaceState({}, "", url);
+          });
+          themeTabs.append(button);
+        });
+      }
+
+      function applyTemplate(key) {
+        const activeKey = TEMPLATES[key] ? key : "ai";
+        const template = TEMPLATES[activeKey];
+        const activeLink = getTemplateLink(activeKey);
+        const activeCta = template.popup.cta;
+        currentTemplateKey = activeKey;
+        setColors(template.colors);
+        renderTabs(activeKey);
+
+        text("#eyebrow", template.eyebrow);
+        text("#heroTitle", template.title);
+        text("#heroLead", template.lead);
+        text("#sectionTitle", template.sectionTitle);
+        text("#sectionText", template.sectionText);
+        text("#mediaTitle", template.mediaTitle);
+        text("#mediaText", template.mediaText);
+        text("#finalText", template.finalText);
+
+        document.title = `${template.label} Hari Ini | TrendPulse`;
+        setMeta("meta[name='description']", template.lead);
+        setMeta("meta[property='og:title']", `${template.label} Hari Ini | TrendPulse`);
+        setMeta("meta[property='og:description']", template.lead);
+        setMeta("meta[property='og:image']", template.image);
+        setMeta("meta[name='twitter:title']", `${template.label} Hari Ini | TrendPulse`);
+        setMeta("meta[name='twitter:description']", template.lead);
+        setMeta("meta[name='twitter:image']", template.image);
+        document.querySelector("#heroImage").src = template.image;
+        document.querySelector("#heroImage").alt = template.imageAlt;
+
+        setLink(primaryCta, activeLink);
+        setLink(finalCta, activeLink);
+        setLink(promoCta, activeLink);
+        text("#primaryCtaText", activeCta);
+        text("#finalCtaText", activeCta);
+
+        renderStats(template.stats);
+        renderTags(template.tags);
+        renderCards(template.items);
+        renderPopup(template.popup);
+        schedulePromo();
+      }
+
+      promoClose.addEventListener("click", closePromo);
+      promoLater.addEventListener("click", closePromo);
+      promoModal.addEventListener("click", (event) => {
+        if (event.target === promoModal) closePromo();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closePromo();
+      });
+      promoCta.addEventListener("click", () => {
+        closePromo();
+      });
+
+      const updatedAt = new Intl.DateTimeFormat("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date());
+      text("#updatedAt", `Update: ${updatedAt}`);
+
+      applyTemplate(getInitialTemplateKey());
+    </script>
+  </body>
+</html>
