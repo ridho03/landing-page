@@ -1,5 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/scholar1/ai-here.scholar-shield.my.id/
-    - /bin/cp -R index.html $DEPLOYPATH
+    - /bin/cp index.html /home/scholar1/ai-here.scholar-shield.my.id/index.html
