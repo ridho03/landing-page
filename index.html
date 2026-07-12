@@ -43,6 +43,7 @@
         --soft: #e9f7f4;
         --shadow: 0 18px 60px rgba(17, 19, 24, 0.12);
         --radius: 8px;
+        --hero-bg: none;
         color-scheme: light;
         font-family:
           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -189,6 +190,40 @@
         color: #ffffff;
       }
 
+      .hero-stage {
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, #090b10 0%, color-mix(in srgb, var(--primary-strong) 46%, #090b10) 54%, #101318 100%),
+          #101318;
+        color: #ffffff;
+        isolation: isolate;
+      }
+
+      .hero-stage::before {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background-image:
+          linear-gradient(90deg, rgba(9, 11, 16, 0.95) 0%, rgba(9, 11, 16, 0.72) 42%, rgba(9, 11, 16, 0.38) 100%),
+          linear-gradient(180deg, rgba(9, 11, 16, 0.36), rgba(9, 11, 16, 0.92)),
+          var(--hero-bg);
+        background-position: center;
+        background-size: cover;
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
+
+      .hero-stage::after {
+        position: absolute;
+        inset: auto 0 0;
+        z-index: -1;
+        height: 7px;
+        content: "";
+        background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-2), var(--primary));
+      }
+
       .hero {
         display: grid;
         min-height: calc(100dvh - 72px);
@@ -212,6 +247,13 @@
         font-weight: 800;
       }
 
+      .hero-stage .eyebrow {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        backdrop-filter: blur(12px);
+      }
+
       .status-dot {
         width: 9px;
         height: 9px;
@@ -228,11 +270,40 @@
         letter-spacing: 0;
       }
 
+      .hero-stage h1 {
+        color: #ffffff;
+        text-shadow: 0 18px 58px rgba(0, 0, 0, 0.38);
+      }
+
       .lead {
         max-width: 660px;
         margin: 0;
         color: var(--muted);
         font-size: clamp(1.02rem, 1.6vw, 1.24rem);
+      }
+
+      .hero-stage .lead {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .live-banner {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+        padding: 8px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        font-weight: 800;
+        backdrop-filter: blur(12px);
+      }
+
+      .live-banner span {
+        color: #ffffff;
       }
 
       .hero-actions {
@@ -264,6 +335,18 @@
 
       .hero-note strong {
         color: var(--primary-strong);
+      }
+
+      .hero-stage .hero-note strong,
+      .hero-stage .hero-note span {
+        border-color: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-stage .hero-note strong {
+        color: #ffffff;
       }
 
       .btn {
@@ -337,6 +420,13 @@
         color: var(--ink);
       }
 
+      .hero-stage .btn-secondary {
+        border-color: rgba(255, 255, 255, 0.24);
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        backdrop-filter: blur(10px);
+      }
+
       .arrow-icon {
         width: 18px;
         height: 18px;
@@ -361,6 +451,13 @@
         backdrop-filter: blur(8px);
       }
 
+      .hero-stage .stat {
+        border-color: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
+      }
+
       .stat strong {
         display: block;
         font-size: 1.36rem;
@@ -374,6 +471,10 @@
         font-size: 0.88rem;
       }
 
+      .hero-stage .stat span {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
       .hero-media {
         position: relative;
         min-height: 540px;
@@ -383,6 +484,12 @@
         background: var(--surface-strong);
         box-shadow: var(--shadow);
         isolation: isolate;
+      }
+
+      .hero-stage .hero-media {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
       }
 
       .hero-media::after {
@@ -905,51 +1012,58 @@
     </header>
 
     <main>
-      <section class="site-shell hero" aria-labelledby="heroTitle">
-        <div>
-          <div class="eyebrow">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span id="eyebrow">Update harian</span>
+      <section class="hero-stage" aria-labelledby="heroTitle">
+        <div class="site-shell hero">
+          <div>
+            <div class="eyebrow">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span id="eyebrow">Update harian</span>
+            </div>
+
+            <h1 id="heroTitle">Loading...</h1>
+            <p class="lead" id="heroLead"></p>
+
+            <div class="live-banner" aria-label="Status live">
+              <span>Live update</span>
+              Rekomendasi tema otomatis berubah setiap hari
+            </div>
+
+            <div class="hero-actions" aria-label="Aksi utama">
+              <a class="btn btn-primary" id="primaryCta" href="#" rel="sponsored noopener">
+                <span id="primaryCtaText">Join Sekarang</span>
+                <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M5 12h14m-6-6 6 6-6 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              <a class="btn btn-secondary" href="#topik">Lihat Topik</a>
+            </div>
+
+            <div class="hero-note" aria-label="Highlight update">
+              <strong>Trending hari ini</strong>
+              <span>Bacaan ringkas</span>
+              <span>Pilihan populer</span>
+              <span>Langsung buka</span>
+            </div>
+
+            <div class="hero-stats" id="heroStats" aria-label="Ringkasan"></div>
           </div>
 
-          <h1 id="heroTitle">Loading...</h1>
-          <p class="lead" id="heroLead"></p>
-
-          <div class="hero-actions" aria-label="Aksi utama">
-            <a class="btn btn-primary" id="primaryCta" href="#" rel="sponsored noopener">
-              <span id="primaryCtaText">Join Sekarang</span>
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M5 12h14m-6-6 6 6-6 6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </a>
-            <a class="btn btn-secondary" href="#topik">Lihat Topik</a>
-          </div>
-
-          <div class="hero-note" aria-label="Highlight update">
-            <strong>Trending hari ini</strong>
-            <span>Bacaan ringkas</span>
-            <span>Pilihan populer</span>
-            <span>Langsung buka</span>
-          </div>
-
-          <div class="hero-stats" id="heroStats" aria-label="Ringkasan"></div>
+          <aside class="hero-media" aria-label="Visual kategori aktif">
+            <img id="heroImage" src="" alt="" width="720" height="820" fetchpriority="high" />
+            <div class="live-strip" id="liveStrip" aria-label="Tag populer"></div>
+            <div class="media-copy">
+              <strong id="mediaTitle">Topik pilihan</strong>
+              <p id="mediaText"></p>
+            </div>
+          </aside>
         </div>
-
-        <aside class="hero-media" aria-label="Visual kategori aktif">
-          <img id="heroImage" src="" alt="" width="720" height="820" fetchpriority="high" />
-          <div class="live-strip" id="liveStrip" aria-label="Tag populer"></div>
-          <div class="media-copy">
-            <strong id="mediaTitle">Topik pilihan</strong>
-            <p id="mediaText"></p>
-          </div>
-        </aside>
       </section>
 
       <section class="section section-alt" id="topik">
@@ -1625,6 +1739,7 @@
         const activeCta = template.popup.cta;
         currentTemplateKey = activeKey;
         setColors(template.colors);
+        root.style.setProperty("--hero-bg", `url("${template.image}")`);
         renderTabs(activeKey);
 
         text("#eyebrow", template.eyebrow);
